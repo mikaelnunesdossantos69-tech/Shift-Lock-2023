@@ -38,4 +38,3 @@ humanoid.CameraOffset = normalOffset
 end
 end
 end)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/mikaelnunesdossantos69-tech/som-abfado/refs/heads/main/som%20abafado"))()
