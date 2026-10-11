@@ -1,0 +1,41 @@
+local player = game.Players.LocalPlayer
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+
+-- CONFIGURAÇÃO (ajuste se quiser)
+local shiftOffset = Vector3.new(1.2, 0.8, 0) -- lado, altura, profundidade
+local normalOffset = Vector3.new(0, 0, 0)
+
+local humanoid
+local isShiftLocked = false
+
+-- Atualiza humanoid quando respawnar
+local function onCharacterAdded(character)
+humanoid = character:WaitForChild("Humanoid")
+humanoid.CameraOffset = normalOffset
+end
+
+player.CharacterAdded:Connect(onCharacterAdded)
+
+if player.Character then
+onCharacterAdded(player.Character)
+end
+
+-- Detecta ShiftLock
+RunService.RenderStepped:Connect(function()
+if not humanoid then return end
+
+-- ShiftLock ativo quando o mouse está travado no centro
+if UserInputService.MouseBehavior == Enum.MouseBehavior.LockCenter then
+if not isShiftLocked then
+isShiftLocked = true
+humanoid.CameraOffset = shiftOffset
+end
+else
+if isShiftLocked then
+isShiftLocked = false
+humanoid.CameraOffset = normalOffset
+end
+end
+end)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/mikaelnunesdossantos69-tech/som-abfado/refs/heads/main/som%20abafado"))()
